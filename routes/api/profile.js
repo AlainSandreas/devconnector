@@ -8,7 +8,7 @@ const config = require('config');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
-// @route  GET api/profiles/me
+// @route  GET api/profile/me
 // @desc   Get current users's profile
 // @access Private
 router.get('/me', auth, async (req, res) => {
