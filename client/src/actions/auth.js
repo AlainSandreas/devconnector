@@ -26,7 +26,8 @@ export const loadUser = () => async dispatch => {
       payload: res.data
     });
 
-    //dispatch(loadUser());
+    // Infinite loop for USER_LOADED >
+     loadUser();
   } catch(err) {
     dispatch({
       type: AUTH_ERROR

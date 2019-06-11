@@ -30,24 +30,22 @@ const EditProfile = ({
   useEffect(() => {
     getCurrentProfile();
 
-    setFormData(
-      {
-        company: loading || !profile.company ? '' : profile.company,
-        website: loading || !profile.website ? '' : profile.website,
-        location: loading || !profile.location ? '' : profile.location,
-        status: loading || !profile.status ? '' : profile.status,
-        skills: loading || !profile.skills ? '' : profile.skills,
-        githubusername:
-          loading || !profile.githubusername ? '' : profile.githubusername,
-        bio: loading || !profile.bio ? '' : profile.bio,
-        twitter: loading || !profile.social ? '' : profile.social.twitter,
-        facebook: loading || !profile.social ? '' : profile.social.facebook,
-        linkedin: loading || !profile.social ? '' : profile.social.linkedin,
-        youtube: loading || !profile.social ? '' : profile.social.youtube,
-        instagram: loading || !profile.social ? '' : profile.social.instagram
-      }
-    );
-  }, [loading]);
+    setFormData({
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      status: loading || !profile.status ? '' : profile.status,
+      skills: loading || !profile.skills ? '' : profile.skills,
+      githubusername:
+        loading || !profile.githubusername ? '' : profile.githubusername,
+      bio: loading || !profile.bio ? '' : profile.bio,
+      twitter: loading || !profile.social ? '' : profile.social.twitter,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
+      linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+      youtube: loading || !profile.social ? '' : profile.social.youtube,
+      instagram: loading || !profile.social ? '' : profile.social.instagram
+    });
+  }, []);
 
   const {
     company,
@@ -67,11 +65,6 @@ const EditProfile = ({
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history, true);
-  };
-
   return (
     <Fragment>
       <h1 className='large text-primary'>Create Your Profile</h1>
@@ -80,7 +73,13 @@ const EditProfile = ({
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className='form' onSubmit={e => onSubmit(e)}>
+      <form
+        className='form'
+        onSubmit={e => {
+          e.preventDefault();
+          createProfile(formData, history, true);
+        }}
+      >
         <div className='form-group'>
           <select name='status' value={status} onChange={e => onChange(e)}>
             <option value='0'>* Select Professional Status</option>
